@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="uz" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>99 TO'G'RI VA 1 XATO — Alex Hormozi Usulidagi Kitob Landing Page</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#0b0f19',
+                        cardBg: '#131c2e',
+                        goldAccent: '#f59e0b',
+                        goldGlow: 'rgba(245, 158, 11, 0.4)',
+                        emeraldGreen: '#10b981',
+                        crimsonRed: '#ef4444',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-glow': 'pulseGlow 2s infinite',
+                        'shimmer': 'shimmer 2.5s infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px) rotateX(8deg) rotateY(-12deg)' },
+                            '50%': { transform: 'translateY(-15px) rotateX(12deg) rotateY(-6deg)' },
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { boxShadow: '0 0 20px rgba(245, 158, 11, 0.5)' },
+                            '50%': { boxShadow: '0 0 40px rgba(245, 158, 11, 0.9)' },
+                        },
+                        shimmer: {
+                            '100%': { transform: 'translateX(100%)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0b0f19;
+            color: #f3f4f6;
+            overflow-x: hidden;
+        }
+
+        /* Glassmorphism elements */
+        .glass-card {
+            background: rgba(19, 28, 46, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card-gold {
+            background: rgba(245, 158, 11, 0.05);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(245, 158, 11, 0.25);
+        }
+
+        /* 3D Perspective Book Effect */
+        .perspective-1000 {
+            perspective: 1200px;
+        }
+
+        .book-3d {
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease;
+            box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.8), -5px -5px 20px rgba(245, 158, 11, 0.15);
+        }
+
+        .book-3d:hover {
+            transform: rotateX(0deg) rotateY(0deg) scale(1.03) !important;
+        }
+
+        .book-spine {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 30px;
+            height: 100%;
+            transform: rotateY(-90deg) translateZ(15px);
+            background: linear-gradient(90deg, #1e293b, #0f172a);
+        }
+
+        /* Glowing text gradient */
+        .gradient-text-gold {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gradient-text-red {
+            background: linear-gradient(135deg, #f87171 0%, #ef4444 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Shimmer button overlay */
+        .shimmer-btn {
+            position: relative;
+            overflow: hidden;
+        }
+        .shimmer-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                60deg,
+                transparent 30%,
+                rgba(255, 255, 255, 0.25) 50%,
+                transparent 70%
+            );
+            transform: rotate(30deg);
+            animation: shimmer 3s infinite;
+        }
+    </style>
+</head>
+<body class="selection:bg-goldAccent selection:text-black">
+
+    <!-- Top Announcement / Countdown Banner (Alex Hormozi Scarcity) -->
+    <div class="bg-gradient-to-r from-amber-600 via-goldAccent to-yellow-600 text-black py-2.5 px-4 font-extrabold text-sm text-center sticky top-0 z-50 shadow-lg flex flex-wrap justify-center items-center gap-3">
+        <span class="flex items-center gap-1.5 uppercase tracking-wide">
+            <i class="fa-solid fa-fire text-red-900 animate-bounce"></i> Shock Offers $50 o'rniga $5!
+        </span>
+        <div class="bg-black/80 text-amber-400 px-3 py-1 rounded-full text-xs font-mono tracking-widest flex items-center gap-2 border border-amber-400/30">
+            <span>AKSIYA TUGASHIGA:</span>
+            <span id="countdown" class="font-black text-amber-300">14:59</span>
+        </div>
+        <a href="https://t.me/Muhammadrasul_013" target="_blank" class="underline hover:text-white transition-colors text-xs sm:text-sm font-black">
+            Hoziroq Band Qilish &rarr;
+        </a>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between border-b border-gray-800/80">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-goldAccent to-amber-600 flex items-center justify-center text-black font-black text-xl shadow-lg shadow-goldGlow">
+                99
+            </div>
+            <span class="text-xl font-black tracking-tight text-white">
+                99 TO'G'RI <span class="text-amber-500">VA 1 XATO</span>
+            </span>
+        </div>
+        <div class="hidden md:flex items-center gap-8 text-sm font-semibold text-gray-300">
+            <a href="#about" class="hover:text-amber-400 transition-colors">Kitob Haqida</a>
+            <a href="#offer" class="hover:text-amber-400 transition-colors">Grand Slam Taklif</a>
+            <a href="#quotes" class="hover:text-amber-400 transition-colors">Iqtiboslar</a>
+            <a href="#quiz" class="hover:text-amber-400 transition-colors">Test</a>
+        </div>
+        <a href="https://t.me/Muhammadrasul_013" target="_blank" class="glass-card hover:border-goldAccent text-amber-400 px-5 py-2.5 rounded-xl font-bold text-sm transition-all duration-300 hover:scale-105 flex items-center gap-2">
+            <i class="fa-brands text-base"></i> Buyurtma Berish
+        </a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative max-w-7xl mx-auto px-6 pt-12 pb-20 md:py-24 grid md:grid-cols-12 gap-12 items-center">
+        <!-- Background Ambient Glows -->
+        <div class="absolute top-1/4 left-10 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-10 right-10 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <!-- Hero Content (8 cols on desktop) -->
+        <div class="md:col-span-7 space-y-6 text-left relative z-10">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 font-bold text-xs sm:text-sm uppercase tracking-wider">
+                <i class="fa-solid fa-bolt text-amber-400"></i> Alex Hormozi $100M Offers Method
+            </div>
+
+            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-white leading-tight tracking-tight">
+                Nega siz 99 ta ishni to'g'ri qilib, <span class="gradient-text-red underline decoration-red-500/40">1 ta xato</span> uchun o'zingizni va boshqalarni ayblaysiz?
+            </h1>
+
+            <p class="text-base sm:text-xl text-gray-300 font-normal leading-relaxed">
+                Kichik xatolar ham katta natijani o'zgartiradi. Ushbu kitob — hayotingizdagi psixologik bosim, tanqid va noto'g'ri e'tibordan xalos bo'lish uchun <strong class="text-amber-400 font-semibold">Motivatsiya, Intizom va Muvaffaqiyat</strong> kaliti!
+            </p>
+
+            <!-- Dynamic Interactive Checkmark/Cross visualization -->
+            <div class="glass-card p-4 rounded-2xl border border-amber-500/20 max-w-xl">
+                <div class="text-xs text-gray-400 mb-2 font-mono uppercase tracking-widest flex justify-between">
+                    <span>Insonlar e'tibor beradigan haqiqat:</span>
+                    <span class="text-red-400 font-bold">9 TO'G'RI, 1 XATO</span>
+                </div>
+                <div class="flex items-center justify-between text-xl sm:text-2xl font-black bg-slate-900/80 p-3 rounded-xl border border-gray-800">
+                    <span class="text-emerald-400">✓</span>
+                    <span class="text-emerald-400">✓</span>
+                    <span class="text-emerald-400">✓</span>
+                    <span class="text-emerald-400">✓</span>
+                    <span class="text-emerald-400">✓</span>
+                    <span class="text-emerald-400">✓</span>
+                    <span class="text-emerald-400">✓</span>
+                    <span class="text-emerald-400">✓</span>
+                    <span class="text-emerald-400">✓</span>
+                    <span class="text-red-500 animate-pulse bg-red-500/20 px-2 py-0.5 rounded-lg border border-red-500/50">✕</span>
+                </div>
+                <p class="text-xs text-gray-400 mt-2 italic">
+                    "Odamlar 99 ta yaxshilikni emas, o'sha 1 ta xatoni xotirada saqlashadi..."
+                </p>
+            </div>
+
+            <!-- Price Stack & CTA -->
+            <div class="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-6">
+                <div class="flex flex-col">
+                    <div class="flex items-center gap-3">
+                        <span class="text-gray-400 line-through text-xl font-bold">$49.00</span>
+                        <span class="bg-red-500/20 text-red-400 text-xs font-black px-2.5 py-1 rounded-md border border-red-500/30">90% CHEGIRMA</span>
+                    </div>
+                    <div class="text-4xl sm:text-5xl font-black text-white flex items-baseline gap-1">
+                        $5.00 <span class="text-sm font-semibold text-gray-400">/ BIR MARTALIK TO'LOV</span>
+                    </div>
+                </div>
+
+                <a href="https://t.me/Muhammadrasul_013" target="_blank" class="shimmer-btn bg-gradient-to-r from-amber-500 via-goldAccent to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-black font-black text-lg py-5 px-8 rounded-2xl shadow-2xl shadow-goldGlow hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3 group text-center">
+                    <span>KITOBNI OLISH — $5</span>
+                    <i class="fa-paper-plane group-hover:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+
+            <div class="flex items-center gap-4 text-xs text-gray-400 pt-2">
+                <span class="flex items-center gap-1.5"><i class="fa-solid fa-check text-emerald-400"></i> Instant PDF yuklab olish</span>
+                <span class="flex items-center gap-1.5"><i class="fa-solid fa-shield-halved text-amber-400"></i> Telegram orqali 100% Xavfsiz</span>
+            </div>
+        </div>
+
+        <!-- Hero 3D Book Graphic (5 cols) -->
+        <div class="md:col-span-5 flex justify-center perspective-1000 relative z-10 my-8 md:my-0">
+            <!-- 3D Book Card Container -->
+            <div class="book-3d animate-float relative w-72 sm:w-80 h-[420px] sm:h-[460px] bg-gradient-to-b from-slate-900 via-slate-800 to-black rounded-r-2xl border-2 border-amber-500/40 p-6 flex flex-col justify-between overflow-hidden cursor-pointer select-none">
+                <!-- Book Spine Layer -->
+                <div class="book-spine"></div>
+
+                <!-- Book Visual Overlay -->
+                <div class="absolute inset-0 bg-cover bg-center opacity-30 mix-blend-overlay" style="background-image: url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=800&q=80');"></div>
+                
+                <!-- Book Content / Cover Design -->
+                <div class="relative z-10">
+                    <div class="flex justify-between items-center border-b border-amber-500/30 pb-3">
+                        <span class="text-xs font-mono font-bold tracking-widest text-amber-400">EKSLUZIV PDF KITOB</span>
+                        <i class="fa-solid fa-book-bookmark text-amber-400 text-lg"></i>
+                    </div>
+
+                    <div class="mt-8 space-y-2">
+                        <h2 class="text-3xl font-black text-white tracking-tight leading-none">
+                            99 TO'G'RI
+                        </h2>
+                        <h2 class="text-3xl font-black text-amber-500 tracking-tight leading-none">
+                            VA 1 XATO
+                        </h2>
+                        <p class="text-xs text-amber-200/80 font-medium pt-2">
+                            KICHIK XATOLAR HAM KATTA NATIJANI O'ZGARTIRADI
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Center Silhouette Graphic -->
+                <div class="my-auto relative z-10 flex justify-center py-4">
+                    <div class="w-28 h-28 rounded-full border-2 border-dashed border-amber-500/50 flex items-center justify-center bg-black/60 shadow-inner">
+                        <i class="fa-solid fa-mountain-sun text-4xl text-amber-400"></i>
+                    </div>
+                </div>
+
+                <!-- Book Footer Details -->
+                <div class="relative z-10 border-t border-gray-800 pt-3 flex justify-between items-end">
+                    <div>
+                        <span class="text-[10px] text-gray-400 uppercase tracking-widest block">Muallif va Usul</span>
+                        <span class="text-xs font-bold text-white">Alex Hormozi Framework</span>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-[10px] text-amber-400 font-bold uppercase tracking-widest block">Format</span>
+                        <span class="text-xs font-bold text-white">PDF Digital Edition</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Alex Hormozi Grand Slam Offer Section -->
+    <section id="offer" class="py-20 bg-slate-950 relative border-t border-b border-gray-800/80">
+        <div class="max-w-5xl mx-auto px-6">
+            
+            <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+                <div class="inline-block px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-bold text-xs uppercase tracking-widest">
+                    ALEX HORMOZI GRAND SLAM OFFER
+                </div>
+                <h2 class="text-3xl sm:text-5xl font-black text-white">
+                    Siz Nimaga <span class="gradient-text-gold">$50+ Qiymatdagi</span> Paketni Olasiz?
+                </h2>
+                <p class="text-gray-400 text-base">
+                    Alex Hormozi usuli bo'yicha: siz to'laydigan narx olinadigan qiymatdan 10 barobar kam bo'lishi shart!
+                </p>
+            </div>
+
+            <!-- Value Stack Items Cards -->
+            <div class="space-y-4">
+                <!-- Item 1: Main Book -->
+                <div class="glass-card p-6 rounded-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6 border-l-4 border-l-amber-500 hover:border-amber-400 transition-all">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-black text-xl shrink-0">
+                            1
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <h3 class="text-xl font-extrabold text-white">"99 TO'G'RI VA 1 XATO" Asosiy PDF Kitobi</h3>
+                                <span class="bg-amber-500/20 text-amber-400 text-xs px-2 py-0.5 rounded font-bold">ASOSIY MAHSULOT</span>
+                            </div>
+                            <p class="text-gray-400 text-sm mt-1">
+                                Insonlar psixologiyasi, 99 to'g'ri va 1 xato fenomeni, tanqidga to'g'ri munosabat va vaqt qadrini anglatuvchi eksklyuziv qo'llanma.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="text-right shrink-0">
+                        <span class="text-xs text-gray-500 block uppercase font-mono">Qiymati</span>
+                        <span class="text-2xl font-black text-amber-400">$25.00</span>
+                    </div>
+                </div>
+
+                <!-- Item 2: Bonus 1 -->
+                <div class="glass-card p-6 rounded-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6 border-l-4 border-l-emerald-500 hover:border-emerald-400 transition-all">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-black text-xl shrink-0">
+                            2
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <h3 class="text-xl font-extrabold text-white">BONUS #1: "Tanqiddan Qalqon" Amaliy Master-Klass</h3>
+                                <span class="bg-emerald-500/20 text-emerald-400 text-xs px-2 py-0.5 rounded font-bold">BEPUL BONUS</span>
+                            </div>
+                            <p class="text-gray-400 text-sm mt-1">
+                                Ijtimoiy tarmoqlar va atrofidagilarning salbiy fikrlariga sovuqqonlik bilan munosabatda bo'lish va ichki xotirjamlikni saqlash strategiyasi.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="text-right shrink-0">
+                        <span class="text-xs text-gray-500 block uppercase font-mono">Qiymati</span>
+                        <span class="text-2xl font-black text-emerald-400">$15.00</span>
+                    </div>
+                </div>
+
+                <!-- Item 3: Bonus 2 -->
+                <div class="glass-card p-6 rounded-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6 border-l-4 border-l-blue-500 hover:border-blue-400 transition-all">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center font-black text-xl shrink-0">
+                            3
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <h3 class="text-xl font-extrabold text-white">BONUS #2: "Vaqt va Haqiqiy Boylik" Tahlil Plani</h3>
+                                <span class="bg-blue-500/20 text-blue-400 text-xs px-2 py-0.5 rounded font-bold">BEPUL BONUS</span>
+                            </div>
+                            <p class="text-gray-400 text-sm mt-1">
+                                Moddiy narsalar va haqiqiy hayotiy qadriyatlar (oila, salomatlik, erkinlik) o'rtasidagi balansni topish uchun checklist va qo'llanma.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="text-right shrink-0">
+                        <span class="text-xs text-gray-500 block uppercase font-mono">Qiymati</span>
+                        <span class="text-2xl font-black text-blue-400">$10.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grand Slam Total Price Box -->
+            <div class="mt-8 glass-card-gold p-8 rounded-3xl border-2 border-amber-500/40 text-center space-y-6 relative overflow-hidden">
+                <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-amber-500/10 rounded-full blur-2xl"></div>
+
+                <div class="space-y-2">
+                    <p class="text-sm uppercase tracking-widest text-amber-400 font-bold">UMUMIY QIYMATI: <span class="line-through text-gray-400">$50.00</span></p>
+                    <h3 class="text-3xl sm:text-5xl font-black text-white">
+                        Siz Uchun Bugungi Maxsus Narx: <span class="text-amber-400">$5 USD</span>
+                    </h3>
+                    <p class="text-emerald-400 font-semibold text-sm">
+                        <i class="fa-solid fa-circle-check"></i> Chegirma faqat taymer tugaguncha amal qiladi!
+                    </p>
+                </div>
+
+                <a href="https://t.me/Muhammadrasul_013" target="_blank" class="shimmer-btn inline-block bg-gradient-to-r from-amber-500 via-goldAccent to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-black font-black text-xl py-5 px-12 rounded-2xl shadow-2xl shadow-goldGlow hover:scale-105 transition-all duration-300 w-full sm:w-auto">
+                    HAMMASINI OLISH — BOR-YO'G'I $5 &rarr;
+                </a>
+
+                <!-- Guarantee Box -->
+                <div class="pt-4 border-t border-amber-500/20 flex flex-col sm:flex-row items-center justify-center gap-4 text-xs text-gray-300">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-shield-cat text-amber-400 text-lg"></i>
+                        <span><strong>100% QONIQUV KAFOLATI:</strong> Telegram orqali muallif bilan to'g'ridan-to'g'ri aloqa.</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Quotes & Key Concepts extracted directly from PDF -->
+    <section id="quotes" class="py-20 max-w-7xl mx-auto px-6">
+        <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+            <h2 class="text-3xl sm:text-5xl font-black text-white">
+                Kitobdan <span class="gradient-text-gold">Eng Kuchli Sitatalar</span>
+            </h2>
+            <p class="text-gray-400 text-base">
+                Ushbu PDF kitobdagi har bir satr sizning dunyoqarashingizni tubdan o'zgartiradi.
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+            <!-- Quote 1 -->
+            <div class="glass-card p-8 rounded-3xl border border-gray-800 relative group hover:border-amber-500/40 transition-all">
+                <i class="fa-solid fa-quote-left text-4xl text-amber-500/20 absolute top-6 left-6"></i>
+                <div class="relative z-10 space-y-4">
+                    <p class="text-lg text-gray-200 font-medium leading-relaxed italic">
+                        "To'qqizta misolni to'g'ri yechdim. Hech kim buni ko'rmadi. Lekin bitta xato qildim — va hamma buni ko'rdi. Hamma ustimdan kuldi."
+                    </p>
+                    <div class="flex items-center justify-between pt-4 border-t border-gray-800/60">
+                        <span class="text-xs text-amber-400 font-mono uppercase font-bold">1-Qism: Hikoyadan</span>
+                        <span class="text-xs text-gray-500">Inson Tabiyati</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quote 2 -->
+            <div class="glass-card p-8 rounded-3xl border border-gray-800 relative group hover:border-amber-500/40 transition-all">
+                <i class="fa-solid fa-quote-left text-4xl text-amber-500/20 absolute top-6 left-6"></i>
+                <div class="relative z-10 space-y-4">
+                    <p class="text-lg text-gray-200 font-medium leading-relaxed italic">
+                        "Odamlar ko'pincha 99 ta yaxshilikni emas, 1 ta xatoni eslab qolishadi. Miyamiz me'yordan chetga chiqqan narsaga ko'proq e'tibor beradi."
+                    </p>
+                    <div class="flex items-center justify-between pt-4 border-t border-gray-800/60">
+                        <span class="text-xs text-amber-400 font-mono uppercase font-bold">2-Qism: E'tibor Qonuni</span>
+                        <span class="text-xs text-gray-500">Psixologik Analiz</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quote 3 -->
+            <div class="glass-card p-8 rounded-3xl border border-gray-800 relative group hover:border-amber-500/40 transition-all">
+                <i class="fa-solid fa-quote-left text-4xl text-amber-500/20 absolute top-6 left-6"></i>
+                <div class="relative z-10 space-y-4">
+                    <p class="text-lg text-gray-200 font-medium leading-relaxed italic">
+                        "Sovuqqonlik — eng kuchli qalqon. Asossiz tanqidlarga shunchaki tupuring! Ha, xato qiling, yiqiling — lekin o'rningizdan turing."
+                    </p>
+                    <div class="flex items-center justify-between pt-4 border-t border-gray-800/60">
+                        <span class="text-xs text-amber-400 font-mono uppercase font-bold">5-Qism: Tanqidga Munosabat</span>
+                        <span class="text-xs text-gray-500">Ruhlantirish</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quote 4 -->
+            <div class="glass-card p-8 rounded-3xl border border-gray-800 relative group hover:border-amber-500/40 transition-all">
+                <i class="fa-solid fa-quote-left text-4xl text-amber-500/20 absolute top-6 left-6"></i>
+                <div class="relative z-10 space-y-4">
+                    <p class="text-lg text-gray-200 font-medium leading-relaxed italic">
+                        "100 yildan so'ng barchamiz unut bo'lamiz... Vaqt o'tadi — mehr qoladi. Haqiqiy boylik faqat pul emas, balki salomatlik, oila va shaxsiy rivojlanishdir."
+                    </p>
+                    <div class="flex items-center justify-between pt-4 border-t border-gray-800/60">
+                        <span class="text-xs text-amber-400 font-mono uppercase font-bold">6 & 7-Qism: Haqiqiy Boylik</span>
+                        <span class="text-xs text-gray-500">Hayotiy Falsafa</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Self-Reflection Quiz Section -->
+    <section id="quiz" class="py-20 bg-slate-950 border-t border-gray-800/80">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center space-y-4 mb-12">
+                <div class="inline-block px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 font-bold text-xs uppercase tracking-widest">
+                    O'ZINGIZ BILAN SUHBAT
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-black text-white">
+                    Ushbu 3 ta Savolga Samimiy Javob Bera Olasizmi?
+                </h2>
+                <p class="text-gray-400 text-sm">
+                    Kitob ichidagi eng chuqur mulohaza topshiriqlari.
+                </p>
+            </div>
+
+            <div class="space-y-6">
+                <!-- Question 1 -->
+                <div class="glass-card p-6 rounded-2xl border border-gray-800 space-y-3">
+                    <h3 class="text-lg font-bold text-white flex items-start gap-3">
+                        <span class="text-amber-400 font-black">1.</span>
+                        Oxirgi marta kimningdir bitta xatosini eslab, uning yuzlab yaxshiligini unutganingni eslay olasanmi?
+                    </h3>
+                    <div class="grid grid-cols-2 gap-3 pt-2">
+                        <button onclick="answerQuiz(this)" class="py-2.5 px-4 rounded-xl border border-gray-700 bg-gray-900/60 hover:border-amber-500 hover:text-amber-400 text-sm font-semibold transition-all text-left">
+                            Ha, afsuski shunday bo'lgan
+                        </button>
+                        <button onclick="answerQuiz(this)" class="py-2.5 px-4 rounded-xl border border-gray-700 bg-gray-900/60 hover:border-amber-500 hover:text-amber-400 text-sm font-semibold transition-all text-left">
+                            Yo'q, har doim adolatli bo'laman
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="glass-card p-6 rounded-2xl border border-gray-800 space-y-3">
+                    <h3 class="text-lg font-bold text-white flex items-start gap-3">
+                        <span class="text-amber-400 font-black">2.</span>
+                        O'zingga nisbatan ham shunday adolatsizlik qilyapsanmi — bitta xatoying uchun o'zingni jazolab, qilingan barcha to'g'ri ishlaringni unutyapsanmi?
+                    </h3>
+                    <div class="grid grid-cols-2 gap-3 pt-2">
+                        <button onclick="answerQuiz(this)" class="py-2.5 px-4 rounded-xl border border-gray-700 bg-gray-900/60 hover:border-amber-500 hover:text-amber-400 text-sm font-semibold transition-all text-left">
+                            Ha, ko'p o'zimni ayblayman
+                        </button>
+                        <button onclick="answerQuiz(this)" class="py-2.5 px-4 rounded-xl border border-gray-700 bg-gray-900/60 hover:border-amber-500 hover:text-amber-400 text-sm font-semibold transition-all text-left">
+                            Yo'q, o'zimga shafqat qilaman
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="glass-card p-6 rounded-2xl border border-gray-800 space-y-3">
+                    <h3 class="text-lg font-bold text-white flex items-start gap-3">
+                        <span class="text-amber-400 font-black">3.</span>
+                        Bugundan boshlab, atrofingdagilarning va o'zingning "99 to'g'risini" ko'rishga tayyormisan?
+                    </h3>
+                    <div class="grid grid-cols-1 gap-3 pt-2">
+                        <button onclick="answerQuiz(this)" class="py-3 px-6 rounded-xl border border-amber-500/50 bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 text-sm font-bold transition-all text-center">
+                            HA, Men hayotimni o'zgartirishga tayyorman!
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quiz Result Box (Initially Hidden or dynamic) -->
+            <div id="quizResult" class="hidden mt-8 p-6 rounded-2xl bg-amber-500/20 border border-amber-500/50 text-center space-y-3">
+                <h4 class="text-xl font-bold text-amber-400">Tashxis: Ushbu kitob aynan siz uchun yozilgan!</h4>
+                <p class="text-sm text-gray-200">
+                    Siz o'z ustingizda ishlashga va fikrlash tarzingizni rivojlantirishga tayyorsiz. $5 investitsiya sizga yillar davomida to'plangan ruhiy yukdan xalos bo'lishga yordam beradi.
+                </p>
+                <a href="https://t.me/Muhammadrasul_013" target="_blank" class="inline-block mt-2 bg-amber-500 text-black font-extrabold px-6 py-3 rounded-xl hover:bg-amber-400 transition-all text-sm">
+                    Kitobni Telegram Orqali Olish &rarr;
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="py-24 relative overflow-hidden text-center">
+        <div class="max-w-4xl mx-auto px-6 space-y-8 relative z-10">
+            <h2 class="text-4xl sm:text-6xl font-black text-white leading-tight">
+                Hayotingizdagi <span class="gradient-text-gold">99 To'g'ri Ishni</span> Qadrlashni Bugundan Boshlang!
+            </h2>
+            <p class="text-xl text-gray-300 max-w-2xl mx-auto">
+                Bitta xato sizning butun muvaffaqiyatingizni belgilay olmaydi. $5 bilan o'z fikrlashingizni mutlaqo yangi bosqichga olib chiqing.
+            </p>
+
+            <div class="pt-4">
+                <a href="https://t.me/Muhammadrasul_013" target="_blank" class="shimmer-btn inline-flex items-center gap-4 bg-gradient-to-r from-amber-500 via-goldAccent to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-black font-black text-2xl py-6 px-12 rounded-3xl shadow-2xl shadow-goldGlow hover:scale-105 transition-all duration-300">
+                    <i class="fa-paper-plane text-2xl"></i>
+                    <span>SOTIB OLISH — $5 (TELEGRAM)</span>
+                </a>
+            </div>
+
+            <p class="text-xs text-gray-500 tracking-widest uppercase">
+                To'lovdan so'ng PDF kitob va bonuslar Telegramingizga zudlik bilan yuboriladi
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-gray-900 text-center text-xs text-gray-600">
+        <p>&copy; 2026 "99 TO'G'RI VA 1 XATO" PDF Kitobi. Barcha huquqlarhimoyalangan.</p>
+        <p class="mt-1 text-gray-500">Rasmiy Sotuvchi va Muallif Telegrami: <a href="https://t.me/Muhammadrasul_013" class="text-amber-500 font-bold hover:underline">@Muhammadrasul_013</a></p>
+    </footer>
+
+    <!-- Floating Sticky Telegram Button -->
+    <a href="https://t.me/Muhammadrasul_013" target="_blank" class="fixed bottom-6 right-6 z-50 bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-black font-black px-5 py-3.5 rounded-full shadow-2xl shadow-goldGlow flex items-center gap-3 transition-all duration-300 hover:scale-110 border border-amber-300/40">
+        <i class="fa-paper-plane text-xl"></i>
+        <span class="hidden sm:inline text-sm">Kitobni Olish ($5)</span>
+    </a>
+
+    <!-- JavaScript logic -->
+    <script>
+        // Countdown Timer Logic (Alex Hormozi Scarcity)
+        let totalSeconds = 14 * 60 + 59;
+        const countdownEl = document.getElementById('countdown');
+
+        const timerInterval = setInterval(() => {
+            if (totalSeconds <= 0) {
+                totalSeconds = 15 * 60; // reset
+            }
+            const minutes = Math.floor(totalSeconds / 60);
+            const seconds = totalSeconds % 60;
+            countdownEl.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            totalSeconds--;
+        }, 1000);
+
+        // Quiz Interaction Logic
+        function answerQuiz(btn) {
+            // Style active button
+            const parent = btn.parentElement;
+            const buttons = parent.querySelectorAll('button');
+            buttons.forEach(b => {
+                b.classList.remove('border-amber-500', 'text-amber-400', 'bg-amber-500/20');
+                b.classList.add('border-gray-700', 'text-gray-300');
+            });
+
+            btn.classList.remove('border-gray-700', 'text-gray-300');
+            btn.classList.add('border-amber-500', 'text-amber-400', 'bg-amber-500/20');
+
+            // Show Result
+            document.getElementById('quizResult').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
